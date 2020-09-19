@@ -1,0 +1,17 @@
+{
+      "firstName": "Bekir",
+      "lastName": "Sezgin",
+      "emailAddress": "bekosez.gmail.com",
+      "joinDate": "01/01/2000",
+      "password": "1234",
+      "phone": "123-234-2345",
+      "subject": "intro",
+      "gender": "Male",
+      "department": "Music",
+      "birthDate": "01/01/1999",
+      "salary": 5000,
+      "batch": 14,
+      "section": "Whatever",
+      "premanentAddress": "Somewhere"
+}
+
