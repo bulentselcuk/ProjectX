@@ -1,6 +1,5 @@
 package com.Tests;
-
-import com.Automation.Pojos.Teacher;
+import com.Automation.Pojos.sunCities;
 import com.Utilities.ConfigurationReader;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -16,49 +15,48 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-
 import static io.restassured.RestAssured.*;
 
-public class TeacherTest {
+public class MetaWeatherSan {
     @BeforeAll
     public static void setup() {
-        baseURI=ConfigurationReader.getProperty ( "PRESCHOOL.URI" );
+        baseURI=ConfigurationReader.getProperty ( "URL.URI" );
     }
     @Test
-    public void getAllTeacher() throws IOException {
+    public void getAllSanCities() throws IOException {
                Response response=
                 given ().contentType ( ContentType.JSON ).
-                        when ().get ( "/teachers/" ).prettyPeek ();
-        List<Teacher>listofTeachers=response.jsonPath ().getList ( "_embedded.teachers",Teacher.class );
+                        when ().get ( "/api/location/search/?query=san" ).prettyPeek ();
+      List<sunCities> sunCitiesList=response.jsonPath ().getList("",sunCities.class);
 
-
+       System.out.println (sunCitiesList);
         HSSFWorkbook workbook = new HSSFWorkbook ();
 
-        HSSFSheet sheet = workbook.createSheet ("Teacher List");
+        HSSFSheet sheet = workbook.createSheet ("City List");
 
         HSSFRow row;
 
 
         int rowRecord = 0;
 
-        for(Teacher each : listofTeachers){
+        for(sunCities each : sunCitiesList){
             row = sheet.createRow ( rowRecord++ );
 
             int cellRecord=0;
 
                 Cell cell1 = row.createCell ( cellRecord++ );
-                cell1.setCellValue ( each.getFirstName ());
+                cell1.setCellValue ( each.getTitle ());
                 Cell cell2 = row.createCell ( cellRecord++ );
-                cell2.setCellValue ( each.getLastName ());
+                cell2.setCellValue ( each.getWoeid ());
                 Cell cell3 = row.createCell ( cellRecord++ );
-                cell3.setCellValue ( each.getPhone ());
+                cell3.setCellValue ( each.getLattlong ());
         }
 
-        FileOutputStream out = new FileOutputStream (new File ("Teacher Data.xls")  );
+        FileOutputStream out = new FileOutputStream (new File ("Weather Data.xls")  );
 
         workbook.write (out);
         out.close ();
-        System.out.println ("Teacher Data writen successfully");
+        System.out.println ("Weather Data writen successfully");
 
     }
 
