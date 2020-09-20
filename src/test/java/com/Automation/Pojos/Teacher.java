@@ -1,5 +1,33 @@
 package com.Automation.Pojos;
 
+import com.google.gson.annotations.SerializedName;
+
+/**
+ *  {
+ *                 "firstName": "NewName",
+ *                 "lastName": "OldName",
+ *                 "emailAddress": "New@gmail.com",
+ *                 "joinDate": "01/02/2020",
+ *                 "password": "233-333-3333",
+ *                 "phone": "293934922",
+ *                 "subject": "swimming",
+ *                 "gender": "Male",
+ *                 "department": "something",
+ *                 "birthDate": "01/29/1988",
+ *                 "salary": 3000,
+ *                 "batch": 18,
+ *                 "section": "whatever",
+ *                 "premanentAddress": "123 maint st",
+ *                 "_links": {
+ *                     "self": {
+ *                         "href": "http://api.cybertektraining.com/teachers/8982"
+ *                     },
+ *                     "teacher": {
+ *                         "href": "http://api.cybertektraining.com/teachers/8982"
+ *                     }
+ *                 }
+ *             },
+ */
 public class Teacher {
 
     private int teacherId;
@@ -17,7 +45,8 @@ public class Teacher {
     private int batch;
     private String section;
     private String premanentAddress;
-
+    @SerializedName ( "_links" )
+    private Object links;
     public int getTeacherId() {
         return teacherId;
     }
